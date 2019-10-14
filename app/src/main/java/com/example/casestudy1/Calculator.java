@@ -324,6 +324,7 @@ class Calculator {
     private void percentage() {
         if (operand1 != 0) {
             operand2 = (operand2 / 100 * operand1);
+            history += "*" + operand1;
         } else {
             operand2 /= 100;
         }
