@@ -4,6 +4,7 @@ class Calculator {
     private String history, current;
     private double operand1, operand2, memory;
     private Operator operator;
+    private boolean flag, firstFlag;
 
     private enum Operator {NONE, ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, PERCENTAGE}
 
@@ -14,6 +15,8 @@ class Calculator {
         operator = Operator.NONE;
         history = "";
         current = "0";
+        flag = false;
+        firstFlag = false;
     }
 
     String getHistory() {
@@ -29,8 +32,16 @@ class Calculator {
     }
 
     void operandClicked(double num) {
-        operand1 = operand1 * 10 + num;
-        current = String.valueOf(operand1);
+        if (flag) {
+            int temp = (int) operand1;
+            String temp1 = temp + "." + (int) num;
+            operand1 = Double.parseDouble(temp1);
+            current = String.valueOf(operand1);
+            flag = false;
+        } else {
+            operand1 = operand1 * 10 + num;
+            current = String.valueOf((int) operand1);
+        }
     }
 
     void additionClicked() {
@@ -137,6 +148,7 @@ class Calculator {
         operator = Operator.NONE;
         history = "";
         current = "0";
+        flag = false;
     }
 
     void memoryAdd() {
@@ -168,8 +180,8 @@ class Calculator {
     }
 
     void dotClicked() {
-//        operand1 = Double.parseDouble(operand1);
-//        current = String.valueOf(operand1);
+        flag = true;
+        firstFlag = true;
     }
 
     private void addition() {
