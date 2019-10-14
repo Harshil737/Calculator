@@ -199,16 +199,23 @@ class Calculator {
 
     void memoryAdd() {
         equalClicked();
-        memory += operand2;
-        operand1 = 0;
-        operand2 = 0;
-        history = "";
-        current = operand2 + "";
-        operator = Operator.NONE;
+        if (operand1 != 0) {
+            memory += operand1;
+        } else {
+            memory += operand2;
+            operand1 = 0;
+            operand2 = 0;
+            history = "";
+            current = operand2 + "";
+            operator = Operator.NONE;
+        }
     }
 
     void memorySubtract() {
         equalClicked();
+        if (operand1 != 0) {
+            memory -= operand1;
+        }
         memory -= operand2;
         operand1 = 0;
         operand2 = 0;
