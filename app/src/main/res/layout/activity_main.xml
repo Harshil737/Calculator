@@ -148,6 +148,7 @@
                     android:layout_weight="1"
                     android:background="@color/operator_background"
                     android:fontFamily="sans-serif-light"
+                    android:onClick="plusMinusClicked"
                     android:text="@string/plus_minus"
                     android:textSize="@dimen/button_font_size" />
 

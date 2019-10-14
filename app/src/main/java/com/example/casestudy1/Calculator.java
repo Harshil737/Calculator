@@ -4,7 +4,7 @@ class Calculator {
     private String history, current;
     private double operand1, operand2, memory;
     private Operator operator;
-    private boolean flag, firstFlag;
+    private boolean flag;
 
     private enum Operator {NONE, ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, PERCENTAGE}
 
@@ -16,7 +16,6 @@ class Calculator {
         history = "";
         current = "0";
         flag = false;
-        firstFlag = false;
     }
 
     String getHistory() {
@@ -46,11 +45,20 @@ class Calculator {
 
     void additionClicked() {
         if (operator == Operator.NONE) {
-            operand2 = operand1;
-            operator = Operator.ADDITION;
-            operand1 = 0;
-            history += operand2 + "+";
-            current = String.valueOf(operand1);
+            if (operand1 == 0) {
+                operand1 = Double.parseDouble(current);
+                operand2 = operand1;
+                operator = Operator.ADDITION;
+                operand1 = 0;
+                history = operand2 + "+";
+                current = String.valueOf(operand1);
+            } else {
+                operand2 = operand1;
+                operator = Operator.ADDITION;
+                operand1 = 0;
+                history += operand2 + "+";
+                current = String.valueOf(operand1);
+            }
         } else {
             equalClicked();
             history += "+";
@@ -61,11 +69,20 @@ class Calculator {
 
     void subtractionClicked() {
         if (operator == Operator.NONE) {
-            operand2 = operand1;
-            operator = Operator.SUBTRACTION;
-            operand1 = 0;
-            history += operand2 + "-";
-            current = String.valueOf(operand1);
+            if (operand1 == 0) {
+                operand1 = Double.parseDouble(current);
+                operand2 = operand1;
+                operator = Operator.SUBTRACTION;
+                operand1 = 0;
+                history = operand2 + "-";
+                current = String.valueOf(operand1);
+            } else {
+                operand2 = operand1;
+                operator = Operator.SUBTRACTION;
+                operand1 = 0;
+                history += operand2 + "-";
+                current = String.valueOf(operand1);
+            }
         } else {
             equalClicked();
             history += "-";
@@ -76,11 +93,20 @@ class Calculator {
 
     void multiplicationClicked() {
         if (operator == Operator.NONE) {
-            operand2 = operand1;
-            operator = Operator.MULTIPLICATION;
-            operand1 = 0;
-            history += operand2 + "*";
-            current = String.valueOf(operand1);
+            if (operand1 == 0) {
+                operand1 = Double.parseDouble(current);
+                operand2 = operand1;
+                operator = Operator.MULTIPLICATION;
+                operand1 = 0;
+                history = operand2 + "*";
+                current = String.valueOf(operand1);
+            } else {
+                operand2 = operand1;
+                operator = Operator.MULTIPLICATION;
+                operand1 = 0;
+                history += operand2 + "*";
+                current = String.valueOf(operand1);
+            }
         } else {
             equalClicked();
             history += "-";
@@ -91,11 +117,20 @@ class Calculator {
 
     void divisionClicked() {
         if (operator == Operator.NONE) {
-            operand2 = operand1;
-            operator = Operator.DIVISION;
-            operand1 = 0;
-            history += operand2 + "/";
-            current = String.valueOf(operand1);
+            if (operand1 == 0) {
+                operand1 = Double.parseDouble(current);
+                operand2 = operand1;
+                operator = Operator.DIVISION;
+                operand1 = 0;
+                history = operand2 + "/";
+                current = String.valueOf(operand1);
+            } else {
+                operand2 = operand1;
+                operator = Operator.DIVISION;
+                operand1 = 0;
+                history += operand2 + "/";
+                current = String.valueOf(operand1);
+            }
         } else {
             equalClicked();
             history += "/";
@@ -181,7 +216,17 @@ class Calculator {
 
     void dotClicked() {
         flag = true;
-        firstFlag = true;
+    }
+
+    void plusMinusClicked() {
+        if (operand1 == 0) {
+            operand1 = Double.parseDouble(current);
+            operand1 = operand1 * -1;
+            current = String.valueOf(operand1);
+        } else {
+            operand1 = operand1 * -1;
+            current = String.valueOf(operand1);
+        }
     }
 
     private void addition() {

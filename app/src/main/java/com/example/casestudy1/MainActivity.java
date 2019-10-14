@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void operandClicked(View view) {
         Button btn = (Button) view;
-        double number = Double.parseDouble(((Button) view).getText().toString());
+        double number = Double.parseDouble(btn.getText().toString());
         calculator.operandClicked(number);
         updateUI();
     }
@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void dotClicked(View view) {
         calculator.dotClicked();
+        updateUI();
+    }
+
+    public void plusMinusClicked(View view) {
+        calculator.plusMinusClicked();
         updateUI();
     }
 
