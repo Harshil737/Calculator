@@ -40,7 +40,7 @@ class Calculator {
                 flag = false;
             } else {
                 double temp = operand1;
-                String temp1 = String.valueOf(temp) + "" + String.valueOf((int) num);
+                String temp1 = temp + "" + (int) num;
                 operand1 = Double.parseDouble(temp1);
                 current = String.valueOf(operand1);
             }
@@ -52,116 +52,146 @@ class Calculator {
 
     void additionClicked() {
         firstFlag = false;
-        if (operator == Operator.NONE) {
-            if (operand1 == 0) {
-                operand1 = Double.parseDouble(current);
-                operand2 = operand1;
-                operator = Operator.ADDITION;
-                operand1 = 0;
-                history = operand2 + "+";
-                current = String.valueOf(operand1);
-            } else {
-                operand2 = operand1;
-                operator = Operator.ADDITION;
-                operand1 = 0;
-                history += operand2 + "+";
-                current = String.valueOf(operand1);
-            }
-        } else {
-            equalClicked();
-            history += "+";
-            current = String.valueOf(operand1);
+
+        // Checking if user changed operator choice
+        if (operand1 == 0) {
             operator = Operator.ADDITION;
+            history = history.substring(0, history.length() - 1) + "+";
+        } else {
+            // Checking if Operator is NONE
+            if (operator == Operator.NONE) {
+                // Checking if Operator is called after equalTo
+                if (operand1 == 0) {
+                    operand1 = Double.parseDouble(current);
+                    operand2 = operand1;
+                    operator = Operator.ADDITION;
+                    operand1 = 0;
+                    history = operand2 + "+";
+                    current = String.valueOf(operand1);
+                } else {
+                    operand2 = operand1;
+                    operator = Operator.ADDITION;
+                    operand1 = 0;
+                    history += operand2 + "+";
+                    current = String.valueOf(operand1);
+                }
+            } else {
+                equalClicked();
+                history += "+";
+                current = String.valueOf(operand1);
+                operator = Operator.ADDITION;
+            }
         }
     }
 
     void subtractionClicked() {
         firstFlag = false;
-        if (operator == Operator.NONE) {
-            if (operand1 == 0) {
-                operand1 = Double.parseDouble(current);
-                operand2 = operand1;
-                operator = Operator.SUBTRACTION;
-                operand1 = 0;
-                history = operand2 + "-";
-                current = String.valueOf(operand1);
-            } else {
-                operand2 = operand1;
-                operator = Operator.SUBTRACTION;
-                operand1 = 0;
-                history += operand2 + "-";
-                current = String.valueOf(operand1);
-            }
-        } else {
-            equalClicked();
-            history += "-";
-            current = String.valueOf(operand1);
+        if (operand1 == 0) {
             operator = Operator.SUBTRACTION;
+            history = history.substring(0, history.length() - 1) + "-";
+        } else {
+            if (operator == Operator.NONE) {
+                if (operand1 == 0) {
+                    operand1 = Double.parseDouble(current);
+                    operand2 = operand1;
+                    operator = Operator.SUBTRACTION;
+                    operand1 = 0;
+                    history = operand2 + "-";
+                    current = String.valueOf(operand1);
+                } else {
+                    operand2 = operand1;
+                    operator = Operator.SUBTRACTION;
+                    operand1 = 0;
+                    history += operand2 + "-";
+                    current = String.valueOf(operand1);
+                }
+            } else {
+                equalClicked();
+                history += "-";
+                current = String.valueOf(operand1);
+                operator = Operator.SUBTRACTION;
+            }
         }
     }
 
     void multiplicationClicked() {
         firstFlag = false;
-        if (operator == Operator.NONE) {
-            if (operand1 == 0) {
-                operand1 = Double.parseDouble(current);
-                operand2 = operand1;
-                operator = Operator.MULTIPLICATION;
-                operand1 = 0;
-                history = operand2 + "*";
-                current = String.valueOf(operand1);
-            } else {
-                operand2 = operand1;
-                operator = Operator.MULTIPLICATION;
-                operand1 = 0;
-                history += operand2 + "*";
-                current = String.valueOf(operand1);
-            }
-        } else {
-            equalClicked();
-            history += "-";
-            current = String.valueOf(operand1);
+        if (operand1 == 0) {
             operator = Operator.MULTIPLICATION;
+            history = history.substring(0, history.length() - 1) + "*";
+        } else {
+            if (operator == Operator.NONE) {
+                if (operand1 == 0) {
+                    operand1 = Double.parseDouble(current);
+                    operand2 = operand1;
+                    operator = Operator.MULTIPLICATION;
+                    operand1 = 0;
+                    history = operand2 + "*";
+                    current = String.valueOf(operand1);
+                } else {
+                    operand2 = operand1;
+                    operator = Operator.MULTIPLICATION;
+                    operand1 = 0;
+                    history += operand2 + "*";
+                    current = String.valueOf(operand1);
+                }
+            } else {
+                equalClicked();
+                history += "*";
+                current = String.valueOf(operand1);
+                operator = Operator.MULTIPLICATION;
+            }
         }
     }
 
     void divisionClicked() {
         firstFlag = false;
-        if (operator == Operator.NONE) {
-            if (operand1 == 0) {
-                operand1 = Double.parseDouble(current);
-                operand2 = operand1;
-                operator = Operator.DIVISION;
-                operand1 = 0;
-                history = operand2 + "/";
-                current = String.valueOf(operand1);
-            } else {
-                operand2 = operand1;
-                operator = Operator.DIVISION;
-                operand1 = 0;
-                history += operand2 + "/";
-                current = String.valueOf(operand1);
-            }
-        } else {
-            equalClicked();
-            history += "/";
-            current = String.valueOf(operand1);
+        if (operand1 == 0) {
             operator = Operator.DIVISION;
+            history = history.substring(0, history.length() - 1) + "/";
+        } else {
+            if (operator == Operator.NONE) {
+                if (operand1 == 0) {
+                    operand1 = Double.parseDouble(current);
+                    operand2 = operand1;
+                    operator = Operator.DIVISION;
+                    operand1 = 0;
+                    history = operand2 + "/";
+                    current = String.valueOf(operand1);
+                } else {
+                    operand2 = operand1;
+                    operator = Operator.DIVISION;
+                    operand1 = 0;
+                    history += operand2 + "/";
+                    current = String.valueOf(operand1);
+                }
+            } else {
+                equalClicked();
+                history += "/";
+                current = String.valueOf(operand1);
+                operator = Operator.DIVISION;
+            }
         }
     }
 
     void percentageClicked() {
-        if (operator == Operator.NONE) {
-            operand2 = operand1;
+        firstFlag = false;
+        if (operand1 == 0) {
             operator = Operator.PERCENTAGE;
-            operand1 = 0;
-            history += operand2 + "%";
-            current = String.valueOf(operand1);
+            history = history.substring(0, history.length() - 1) + "%";
         } else {
-            equalClicked();
-            history += "%";
-            current = String.valueOf(operand1);
-            operator = Operator.PERCENTAGE;
+            if (operator == Operator.NONE) {
+                operand2 = operand1;
+                operator = Operator.PERCENTAGE;
+                operand1 = 0;
+                history += operand2 + "%";
+                current = String.valueOf(operand1);
+            } else {
+                equalClicked();
+                history += "%";
+                current = String.valueOf(operand1);
+                operator = Operator.PERCENTAGE;
+            }
         }
     }
 
@@ -281,7 +311,11 @@ class Calculator {
     }
 
     private void percentage() {
-        operand2 /= 100;
+        if (operand1 != 0) {
+            operand2 = (operand2 / 100 * operand1);
+        } else {
+            operand2 /= 100;
+        }
         operand1 = 0;
         current = operand2 + "";
         operator = Operator.NONE;
