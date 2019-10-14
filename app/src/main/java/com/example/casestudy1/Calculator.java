@@ -4,7 +4,7 @@ class Calculator {
     private String history, current;
     private double operand1, operand2, memory;
     private Operator operator;
-    private boolean flag;
+    private boolean firstFlag, flag;
 
     private enum Operator {NONE, ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION, PERCENTAGE}
 
@@ -15,7 +15,7 @@ class Calculator {
         operator = Operator.NONE;
         history = "";
         current = "0";
-        flag = false;
+        firstFlag = false;
     }
 
     String getHistory() {
@@ -31,12 +31,19 @@ class Calculator {
     }
 
     void operandClicked(double num) {
-        if (flag) {
-            int temp = (int) operand1;
-            String temp1 = temp + "." + (int) num;
-            operand1 = Double.parseDouble(temp1);
-            current = String.valueOf(operand1);
-            flag = false;
+        if (firstFlag) {
+            if (flag) {
+                int temp = (int) operand1;
+                String temp1 = temp + "." + (int) num;
+                operand1 = Double.parseDouble(temp1);
+                current = String.valueOf(operand1);
+                flag = false;
+            } else {
+                double temp = operand1;
+                String temp1 = String.valueOf(temp) + "" + String.valueOf((int) num);
+                operand1 = Double.parseDouble(temp1);
+                current = String.valueOf(operand1);
+            }
         } else {
             operand1 = operand1 * 10 + num;
             current = String.valueOf((int) operand1);
@@ -44,6 +51,7 @@ class Calculator {
     }
 
     void additionClicked() {
+        firstFlag = false;
         if (operator == Operator.NONE) {
             if (operand1 == 0) {
                 operand1 = Double.parseDouble(current);
@@ -68,6 +76,7 @@ class Calculator {
     }
 
     void subtractionClicked() {
+        firstFlag = false;
         if (operator == Operator.NONE) {
             if (operand1 == 0) {
                 operand1 = Double.parseDouble(current);
@@ -92,6 +101,7 @@ class Calculator {
     }
 
     void multiplicationClicked() {
+        firstFlag = false;
         if (operator == Operator.NONE) {
             if (operand1 == 0) {
                 operand1 = Double.parseDouble(current);
@@ -116,6 +126,7 @@ class Calculator {
     }
 
     void divisionClicked() {
+        firstFlag = false;
         if (operator == Operator.NONE) {
             if (operand1 == 0) {
                 operand1 = Double.parseDouble(current);
@@ -183,7 +194,7 @@ class Calculator {
         operator = Operator.NONE;
         history = "";
         current = "0";
-        flag = false;
+        firstFlag = false;
     }
 
     void memoryAdd() {
@@ -215,6 +226,7 @@ class Calculator {
     }
 
     void dotClicked() {
+        firstFlag = true;
         flag = true;
     }
 
