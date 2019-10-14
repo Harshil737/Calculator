@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="left_operator_background">#f98e12</color>
+    <color name="output_screen">#202020</color>
+    <color name="operator_background">#c5c5c7</color>
+    <color name="digit_background">#d2d4d6</color>
+</resources>
