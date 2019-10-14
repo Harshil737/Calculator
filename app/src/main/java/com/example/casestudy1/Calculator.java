@@ -31,6 +31,9 @@ class Calculator {
     }
 
     void operandClicked(double num) {
+        if (operand2 != 0 && operator == Operator.NONE) {
+            clearAll();
+        }
         if (firstFlag) {
             if (flag) {
                 int temp = (int) operand1;
@@ -52,9 +55,8 @@ class Calculator {
 
     void additionClicked() {
         firstFlag = false;
-
         // Checking if user changed operator choice
-        if (operand1 == 0) {
+        if (operand1 == 0 && operator != Operator.NONE) {
             operator = Operator.ADDITION;
             history = history.substring(0, history.length() - 1) + "+";
         } else {
@@ -86,7 +88,7 @@ class Calculator {
 
     void subtractionClicked() {
         firstFlag = false;
-        if (operand1 == 0) {
+        if (operand1 == 0 && operator != Operator.NONE) {
             operator = Operator.SUBTRACTION;
             history = history.substring(0, history.length() - 1) + "-";
         } else {
@@ -116,7 +118,7 @@ class Calculator {
 
     void multiplicationClicked() {
         firstFlag = false;
-        if (operand1 == 0) {
+        if (operand1 == 0 && operator != Operator.NONE) {
             operator = Operator.MULTIPLICATION;
             history = history.substring(0, history.length() - 1) + "*";
         } else {
@@ -146,7 +148,7 @@ class Calculator {
 
     void divisionClicked() {
         firstFlag = false;
-        if (operand1 == 0) {
+        if (operand1 == 0 && operator != Operator.NONE) {
             operator = Operator.DIVISION;
             history = history.substring(0, history.length() - 1) + "/";
         } else {
@@ -176,16 +178,25 @@ class Calculator {
 
     void percentageClicked() {
         firstFlag = false;
-        if (operand1 == 0) {
+        if (operand1 == 0 && operator != Operator.NONE) {
             operator = Operator.PERCENTAGE;
             history = history.substring(0, history.length() - 1) + "%";
         } else {
             if (operator == Operator.NONE) {
-                operand2 = operand1;
-                operator = Operator.PERCENTAGE;
-                operand1 = 0;
-                history += operand2 + "%";
-                current = String.valueOf(operand1);
+                if (operand1 == 0) {
+                    operand1 = Double.parseDouble(current);
+                    operand2 = operand1;
+                    operator = Operator.PERCENTAGE;
+                    operand1 = 0;
+                    history = operand2 + "%";
+                    current = String.valueOf(operand1);
+                } else {
+                    operand2 = operand1;
+                    operator = Operator.PERCENTAGE;
+                    operand1 = 0;
+                    history += operand2 + "%";
+                    current = String.valueOf(operand1);
+                }
             } else {
                 equalClicked();
                 history += "%";
